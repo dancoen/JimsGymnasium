@@ -4,6 +4,7 @@ An open source fighting game directed by Tim Smith (https://github.com/SquidHat1
 
 Lead Developers:
 Tim Smith
+
 Dan Coen
 
 Animators:
