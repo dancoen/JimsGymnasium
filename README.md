@@ -1,4 +1,4 @@
-# Jims Gymnasium
+# Jim's Gymnasium
 
 An open source fighting game directed by Tim Smith (https://github.com/SquidHat14)
 
