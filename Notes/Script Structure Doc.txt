@@ -1,0 +1,45 @@
+♪ = Setup in animation state machine
+
+
+All Classes:
+		Players:
+		ABSOLUTELY ALL CODE SHOULD BE EXECUTED IN FIXED UPDATE EXCEPT FOR BUTTON CHECKING
+			State Script: 
+				In air? ♪
+				Standing? ♪
+				Crouching? ♪
+				Grabbed? ♪
+				Grabbing? ♪
+				Knocked Down? ♪
+				In Attack? (Attacking before hitting anyone) ♪
+				Attacked? (in hitstun) ♪
+				In Grabbing? (Not grabbed anyone yet but in the grabbing animation) ♪
+				In multi hit move? (Think cpt. Falcon gentleman)  (This may work in just the normal attack state, not sure yet) (Ignoring for now because not sure necessary and seems more annoying than its worth)
+				Teching? ♪
+				Jump Squat? ♪
+				Running/Walking? ♪
+				Backing up? ♪
+				Blocking? ♪
+				Jump land? ♪
+				Dead? ♪
+				Spawning? ♪
+
+
+			Movement Script:
+				Collisions
+				Gravity (Can be unique for individual characters - think smash floaties vs fast fallers)
+				Jump Data (How high can they jump, how slow is the rise, short hop frame window?, Min jump height,)
+
+			Button Checking:
+				What action to take - check state, if actionable start doing whatever the button tells you to do
+
+			
+
+		Match Scripts: (Currently unsure of needed structure but pertinent information listed below)
+			Timer
+			Win Record
+			Win condition (3 wins? 2 wins? damage dealt? lives remaining?)
+
+
+
+
