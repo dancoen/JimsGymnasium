@@ -13,11 +13,19 @@ TagManager:
   - UI
   - 
   - 
+<<<<<<< HEAD
   - Hitbox
   - Hurtbox
   - Floor
   - Walls
   - Player Physics Collider
+=======
+  - 
+  - 
+  - 
+  - 
+  - 
+>>>>>>> adf018da8c39689d63e4c12d463651b09d3e81f0
   - 
   - 
   - 
