@@ -301,7 +301,7 @@ Camera:
   far clip plane: 1000
   field of view: 0.00001
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2.25
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -325,7 +325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: 0, y: 2.07, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -356,7 +356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557648766}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.59, z: 0}
+  m_LocalPosition: {x: -0.08, y: 1.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -412,6 +412,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1185619570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1185619571}
+  - component: {fileID: 1185619572}
+  m_Layer: 13
+  m_Name: PushBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1185619571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185619570}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1436113425435087895}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1185619572
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185619570}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0002791882, y: -0.000000059604645}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.31597114, y: 0.31597078}
+  m_EdgeRadius: 0
 --- !u!4 &1237739937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1952526253970413398, guid: ad8553142fafc8740bfca90d561a9262,
@@ -553,12 +610,12 @@ PrefabInstance:
     - target: {fileID: 1436113426190499306, guid: b3c298d404ebfd54dbf496329c04e069,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.52
+      value: -0.803
       objectReference: {fileID: 0}
     - target: {fileID: 1436113426190499306, guid: b3c298d404ebfd54dbf496329c04e069,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.284
+      value: 0.525
       objectReference: {fileID: 0}
     - target: {fileID: 1436113426190499306, guid: b3c298d404ebfd54dbf496329c04e069,
         type: 3}
@@ -618,7 +675,7 @@ PrefabInstance:
     - target: {fileID: 4910816732018342865, guid: b3c298d404ebfd54dbf496329c04e069,
         type: 3}
       propertyPath: gravity
-      value: -40.72
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 6583153344767727780, guid: b3c298d404ebfd54dbf496329c04e069,
         type: 3}
@@ -664,6 +721,8 @@ GameObject:
   - component: {fileID: 1436113425435087893}
   - component: {fileID: 1436113425435087894}
   - component: {fileID: 1436113425435087892}
+  - component: {fileID: 1436113425435087891}
+  - component: {fileID: 1436113425435087890}
   m_Layer: 12
   m_Name: Player 2
   m_TagString: Untagged
@@ -671,6 +730,52 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1436113425435087890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436113425435087889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c86e4f6c82e435498ac66ef3cd59758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 4
+  accelerationTimeAirborne: 0.2
+  accelerationTimeGrounded: 0.18
+  moveSpeed: 4
+  coyoteTimeFrameLimit: 3
+  SpecialIdleAnimTimer: 0
+  gravity: -22.73
+  jumpVelocity: 4.29
+  minJumpVelocity: 1.9
+  Player2: 1
+  velocity: {x: 0, y: 0, z: 0}
+  velocityXSmoothing: 0
+  controller: {fileID: 0}
+--- !u!114 &1436113425435087891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436113425435087889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24073b749acd60448789242277bee21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 3072
+  horizontalRayCount: 8
+  verticalRayCount: 8
+  horizontalRaySpacing: 0
+  verticalRaySpacing: 0
+  collider: {fileID: 0}
+  playerInput: {x: 0, y: 0}
 --- !u!50 &1436113425435087892
 Rigidbody2D:
   serializedVersion: 4
@@ -679,11 +784,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436113425435087889}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -776,9 +881,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436113425435087889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.66, y: 0.284, z: 0}
+  m_LocalPosition: {x: 1.223, y: 0.507, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1185619571}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

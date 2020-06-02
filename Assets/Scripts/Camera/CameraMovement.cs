@@ -16,6 +16,12 @@ public class CameraMovement : MonoBehaviour
     {
         checkDependencies();
 
+        if(yOffset == 0)
+        {
+            Debug.Log("yOffset for camera was left as 0, so setting as the camera's y position", transform);
+            yOffset = transform.position.y;
+        }
+
         //Set the bounds of the stage so the camera doesnt go past it.  
         //Uses the length of the floor and gets the edge and assumes that is the edge of the stage.  DO NOT MAKE STAGE LONGER THAN NECESSARY.  This assumes the floor's center is at x = 0
         minXPosition = 0 - (floor.GetComponent<Transform>().localScale.x * floor.GetComponent<BoxCollider2D>().size.x) / 2;
@@ -35,7 +41,9 @@ public class CameraMovement : MonoBehaviour
     void FixedUpdate()
     {
         transform.position = new Vector3(Mathf.Clamp((playerOne.position.x + playerTwo.position.x) / 2, minXPosition + cameraWidth/2, maxXPosition - cameraWidth/2 ), yOffset, -100);
+
         //Move the walls to be at the edge of the camera viewport
+
         left_wall.offset = new Vector2(-1 * (minXPosition - (transform.position.x - cameraWidth / 2)), 0);
         right_wall.offset = new Vector2(-1 * (maxXPosition - (transform.position.x + cameraWidth / 2)), 0);
     }

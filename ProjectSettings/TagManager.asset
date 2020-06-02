@@ -13,12 +13,12 @@ TagManager:
   - UI
   - 
   - 
-  - Hitbox
-  - Hurtbox
+  - HitBox
+  - HurtBox
   - Floor
   - Walls
   - Player Physics Collider
-  - 
+  - Player Push Box
   - 
   - 
   - 

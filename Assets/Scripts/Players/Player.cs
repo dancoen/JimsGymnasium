@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public float accelerationTimeGrounded = .18f;
     public float moveSpeed = 4;
 
+    //For Testing
+
     [Range (0,15)]
     public int coyoteTimeFrameLimit = 3;
     private int coyoteTimeCurrentFrame = 0;
@@ -24,6 +26,8 @@ public class Player : MonoBehaviour
     public float jumpVelocity;
     public float minJumpVelocity;
 
+    public bool Player2;
+
     [HideInInspector]
     public Vector3 velocity;
 
@@ -31,66 +35,39 @@ public class Player : MonoBehaviour
 
     private bool holdingJump;
     private float inputX;
-    private bool alreadyJumped = true;
-    private bool inCustcene = false;
 
     [HideInInspector]
     public Controller2D controller;
-    Animator animate;
     float Xscale;
+
+    private float targetVelocityX;
 
     void Awake()
     {
-        if (instance != null)
-        {
-            Debug.LogError("More than one Player in the scene.");
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-        //DontDestroyOnLoad(this.gameObject);
-    }
 
+    }
 
     void Start()
     {
         controller = GetComponent<Controller2D>();
-        animate = GetComponent<Animator>();
         Xscale = this.gameObject.transform.localScale.x;
     }
 
     void FixedUpdate()
     {
-        //animate.ResetTrigger("Airborne");
-        float targetVelocityX = inputX * moveSpeed;
-
-
-            if (velocity.x == 0 && controller.collisions.below)
+            if (controller.collisions.below)
             {
-                IdleAnimCounter++;
-            }
-            else
-            {
-                IdleAnimCounter = 0;
+                targetVelocityX = inputX * moveSpeed;
             }
 
-            if (controller.collisions.above)
-            {
-                velocity.y = 0;
-            }
             if (controller.collisions.below)
             {
                 velocity.y = 0;
-                coyoteTimeCurrentFrame = 0;
-                alreadyJumped = false;
             }
 
-            if (holdingJump && (controller.collisions.below || (coyoteTimeCurrentFrame < coyoteTimeFrameLimit && alreadyJumped == false)))
+            if (holdingJump && controller.collisions.below )
             {
                 velocity.y = jumpVelocity;
-                alreadyJumped = true;
             }
 
             if (!holdingJump && !controller.collisions.below && velocity.y > minJumpVelocity)
@@ -98,15 +75,15 @@ public class Player : MonoBehaviour
                 velocity.y = minJumpVelocity;
             }
 
-            coyoteTimeCurrentFrame++;
-
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+        velocity.x = targetVelocityX;
 
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
 
+        holdingJump = false;
 
+        /*
         if (inputX < 0)
         {
             this.gameObject.transform.localScale = new Vector2(-Xscale, transform.localScale.y);
@@ -115,21 +92,23 @@ public class Player : MonoBehaviour
         {
             this.gameObject.transform.localScale = new Vector2(Xscale, transform.localScale.y);
         }
+        */
     }
     private void Update()
     {
-        inputX = Input.GetAxisRaw("Horizontal");
-        holdingJump = Input.GetKey("w") || Input.GetKey(KeyCode.Space);
-    }
+        inputX = 0;
+        if (Player2)
+        {
+            inputX += Input.GetKey(KeyCode.RightArrow) ? 1f : 0f;
+            inputX -= Input.GetKey(KeyCode.LeftArrow) ? 1f : 0f;
+        }
+        else
+        {
+            inputX += Input.GetKey("d") ? 1f : 0f;
+            inputX -= Input.GetKey("a") ? 1f : 0f;
+        }
 
-
-    public void setPlayerSpeed(int speed)
-    {
-        inputX = speed;
-    }
-
-    public void setPlayerInputLock(bool Lock) //true -> disable input
-    {
-        inCustcene = Lock;
+        //Checks every frame on update between frames of FixedUpdate to see if jump key was pressed and then resets holdingJump after FixedUpdate
+        if(!holdingJump) holdingJump = Input.GetKeyDown("w");
     }
 }
