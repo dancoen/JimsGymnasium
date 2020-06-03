@@ -1,31 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.InputSystem;
 
 [System.Serializable]
 [RequireComponent(typeof(Controller2D))]
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-
-    public static Player instance;
-
     public float jumpHeight = 4;
-    public float accelerationTimeAirborne = .2f;
-    public float accelerationTimeGrounded = .18f;
     public float moveSpeed = 4;
-
-    //For Testing
-
-    [Range (0,15)]
-    public int coyoteTimeFrameLimit = 3;
-    private int coyoteTimeCurrentFrame = 0;
-    private int IdleAnimCounter = 0;
-    public int SpecialIdleAnimTimer;
 
     public float gravity;
     public float jumpVelocity;
-    public float minJumpVelocity;
 
+    //For Testing
     public bool Player2;
 
     [HideInInspector]
@@ -70,11 +58,6 @@ public class Player : MonoBehaviour
                 velocity.y = jumpVelocity;
             }
 
-            if (!holdingJump && !controller.collisions.below && velocity.y > minJumpVelocity)
-            {
-                velocity.y = minJumpVelocity;
-            }
-
         velocity.x = targetVelocityX;
 
         velocity.y += gravity * Time.deltaTime;
@@ -109,6 +92,19 @@ public class Player : MonoBehaviour
         }
 
         //Checks every frame on update between frames of FixedUpdate to see if jump key was pressed and then resets holdingJump after FixedUpdate
-        if(!holdingJump) holdingJump = Input.GetKeyDown("w");
+        //Essentially just a crappy input buffer for frame differences
+
+        //This will need to be updated later on to implement different jump lengths based on character and moving forward/backward
+        if (!holdingJump)
+        {
+            if (Player2)
+            {
+                holdingJump = Input.GetKey(KeyCode.UpArrow);
+            }
+            else
+            {
+                holdingJump = Input.GetKey("w");
+            }
+        }
     }
 }
