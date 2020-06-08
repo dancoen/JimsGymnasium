@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-using UnityEngine.InputSystem;
 
 [System.Serializable]
+
 [RequireComponent(typeof(Controller2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float jumpHeight = 4;
     public float moveSpeed = 4;
 
     public float gravity;
@@ -24,11 +23,15 @@ public class PlayerMovement : MonoBehaviour
     private bool holdingJump;
     private float inputX;
 
+    private float pushX = 0;
+
     [HideInInspector]
     public Controller2D controller;
     float Xscale;
 
     private float targetVelocityX;
+
+    private Transform otherPlayer;
 
     void Awake()
     {
@@ -39,24 +42,36 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<Controller2D>();
         Xscale = this.gameObject.transform.localScale.x;
+
+        if(Player2)
+        {
+            otherPlayer = GameObject.Find("Player 1").GetComponent<Transform>();
+        }
+        else 
+        {
+            otherPlayer = GameObject.Find("Player 2").GetComponent<Transform>();
+        }
     }
 
     void FixedUpdate()
     {
-            if (controller.collisions.below)
-            {
-                targetVelocityX = inputX * moveSpeed;
-            }
+        //This is where we will setup the state machine in the future with a switch case statement based on the state.  We will check inputs in another class and then the inputs will switch states.  Each state has differnt movment abilities and require a different function that will be called from this FixedUpdate;
 
-            if (controller.collisions.below)
-            {
-                velocity.y = 0;
-            }
+        if (controller.collisions.below)
+        {
+            
+            targetVelocityX = inputX * moveSpeed;
 
-            if (holdingJump && controller.collisions.below )
+            velocity.y = 0;
+
+            if (holdingJump)
             {
                 velocity.y = jumpVelocity;
             }
+        }
+
+        //this will deal with inputs along with input against another player walking into you.  PushX is set in the PushBox script;
+        targetVelocityX += pushX;
 
         velocity.x = targetVelocityX;
 
@@ -66,16 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
         holdingJump = false;
 
-        /*
-        if (inputX < 0)
-        {
-            this.gameObject.transform.localScale = new Vector2(-Xscale, transform.localScale.y);
-        }
-        else if(inputX > 0)
-        {
-            this.gameObject.transform.localScale = new Vector2(Xscale, transform.localScale.y);
-        }
-        */
+        checkToSwitchPositions();      
     }
     private void Update()
     {
@@ -106,5 +112,62 @@ public class PlayerMovement : MonoBehaviour
                 holdingJump = Input.GetKey("w");
             }
         }
+    }
+
+    public void setPushX(float x)
+    {
+        pushX = x;
+    }
+
+    public float getPushX()
+    {
+        return pushX;
+    }
+
+    public float getInputX()
+    {
+        return inputX;
+    }
+
+    public float getMovementSpeed()
+    {
+        return moveSpeed;
+    }
+
+    void checkToSwitchPositions()
+    {
+        if (controller.collisions.below) //Change Later to switch sides only when in the standing state
+        {
+
+            //Assuming player1 is on the left.  Turning around on position switch.
+            if (Player2)
+            {
+                if (otherPlayer.position.x > transform.position.x)
+                {
+                    this.gameObject.transform.localScale = new Vector2(-Xscale, transform.localScale.y);
+                }
+                else
+                {
+                    this.gameObject.transform.localScale = new Vector2(Xscale, transform.localScale.y);
+                }
+            }
+
+            else
+            {
+                if (otherPlayer.position.x < transform.position.x)
+                {
+                    this.gameObject.transform.localScale = new Vector2(-Xscale, transform.localScale.y);
+                }
+                else
+                {
+                    this.gameObject.transform.localScale = new Vector2(Xscale, transform.localScale.y);
+                }
+            }
+        }
+    }
+
+    public bool isGrounded()
+    {
+        return controller.collisions.below;
     }
 }
