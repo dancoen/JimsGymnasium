@@ -33,7 +33,8 @@ All Classes:
 			Button Checking:
 				What action to take - check state, if actionable start doing whatever the button tells you to do
 
-			
+			Attacks:
+				Array of hitboxes
 
 		Match Scripts: (Currently unsure of needed structure but pertinent information listed below)
 			Timer
