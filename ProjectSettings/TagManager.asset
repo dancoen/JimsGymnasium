@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - Floor
+  - PushboxLeft
+  - PushboxRight
   layers:
   - Default
   - TransparentFX
@@ -13,20 +17,12 @@ TagManager:
   - UI
   - 
   - 
-<<<<<<< HEAD
-  - 
-  - 
-  - 
-  - 
-  - 
-=======
-  - Hitbox
-  - Hurtbox
   - Floor
   - Walls
+  - Hitbox
+  - Hurtbox
+  - Pushbox
   - Player Physics Collider
->>>>>>> origin/master
-  - 
   - 
   - 
   - 

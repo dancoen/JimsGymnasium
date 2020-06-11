@@ -8,13 +8,24 @@ public class CameraMovement : MonoBehaviour
     public Transform playerOne, playerTwo;
     public float yOffset;
     public GameObject floor;
+    public float cameraYRigidity = 4;
+
+    [Range(1.0f, 10.0f)]
+    public float smoothing = 1f;
 
     private float minXPosition, maxXPosition;
     private float cameraWidth;
 
+    
+
     void Start()
     {
         checkDependencies();
+        if(yOffset == 0)
+        {
+            Debug.Log("yOffset for camera was left as 0, so setting as the camera's y position", transform);
+            yOffset = transform.position.y;
+        }
 
         //Set the bounds of the stage so the camera doesnt go past it.  
         //Uses the length of the floor and gets the edge and assumes that is the edge of the stage.  DO NOT MAKE STAGE LONGER THAN NECESSARY.  This assumes the floor's center is at x = 0
@@ -31,13 +42,19 @@ public class CameraMovement : MonoBehaviour
     }
 
     // Set camera at the middle of the 2 players x position.  Move walls to the edge of the camera's viewport until it reaches the edge of the stage using Mathf.Clamp
-    // NOTE: keep Z position at a negative number otherwise some items will not get shown.  Also, the clamp function is used assuming the stage is centered at x = 0
+    // NOTE: keep camera's Z position at a negative number otherwise some items will not get shown.  Also, the clamp function is used assuming the stage is centered at x = 0
     void FixedUpdate()
     {
-        transform.position = new Vector3(Mathf.Clamp((playerOne.position.x + playerTwo.position.x) / 2, minXPosition + cameraWidth/2, maxXPosition - cameraWidth/2 ), yOffset, -100);
+        Vector3 newPosition = new Vector3(Mathf.Clamp((playerOne.position.x + playerTwo.position.x) / 2f, minXPosition + cameraWidth / 2f, maxXPosition - cameraWidth / 2f),
+         (playerOne.position.y + playerTwo.position.y) / cameraYRigidity + yOffset, -100);
+
+        transform.position = Vector3.Slerp(transform.position, newPosition, smoothing * Time.deltaTime);
+
         //Move the walls to be at the edge of the camera viewport
+
         left_wall.offset = new Vector2(-1 * (minXPosition - (transform.position.x - cameraWidth / 2)), 0);
         right_wall.offset = new Vector2(-1 * (maxXPosition - (transform.position.x + cameraWidth / 2)), 0);
+
     }
 
     void checkDependencies()
