@@ -1,0 +1,15 @@
+{
+    "name": "VectorWar",
+    "references": [
+        "GUID:0c0029a6e6a29384bb13962f99bfd024"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
