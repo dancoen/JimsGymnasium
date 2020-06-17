@@ -133,8 +133,6 @@ public class Controller2D : RaycastController
 
 			if (hit)
 			{
-				Debug.Log(hit.transform);
-
 				if (hit.collider.tag == "Through")
 				{
 					if (directionY == 1 || hit.distance == 0)

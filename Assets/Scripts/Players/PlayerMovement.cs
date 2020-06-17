@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Transform otherPlayer;
 
+    private bool MidAirCollision = false;
+
     void Awake()
     {
 
@@ -46,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         if(Player2)
         {
             otherPlayer = GameObject.Find("Player 1").GetComponent<Transform>();
+            this.gameObject.transform.localScale = new Vector2(-Xscale, transform.localScale.y);
         }
         else 
         {
@@ -59,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (controller.collisions.below)
         {
-            
             targetVelocityX = inputX * moveSpeed;
 
             velocity.y = 0;
@@ -71,6 +73,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //this will deal with inputs along with input against another player walking into you.  PushX is set in the PushBox script;
+
+        if(controller.collisions.below && holdingJump)
+        {
+            pushX = 0;
+        }
+
+        if (MidAirCollision)
+        {
+            targetVelocityX = 0;
+        }
+
         targetVelocityX += pushX;
 
         velocity.x = targetVelocityX;
@@ -81,7 +94,10 @@ public class PlayerMovement : MonoBehaviour
 
         holdingJump = false;
 
-        checkToSwitchPositions();      
+        MidAirCollision = false;
+
+        checkToSwitchPositions();
+
     }
     private void Update()
     {
@@ -114,6 +130,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public int velocitySign()
+    {
+        if (velocity.x < 0)
+        {
+            return -1;
+        }
+        else if (velocity.x == 0)
+        {
+            return 0;
+        }
+        return 1;
+    }
+
     public void setPushX(float x)
     {
         pushX = x;
@@ -124,14 +153,34 @@ public class PlayerMovement : MonoBehaviour
         return pushX;
     }
 
+    public float getYVelocity()
+    {
+        return velocity.y;
+    }
+
+    public float getXVelocity()
+    {
+        return velocity.x;
+    }
+
     public float getInputX()
     {
         return inputX;
     }
 
+    public bool pressingJump()
+    {
+        return holdingJump;
+    }
+
     public float getMovementSpeed()
     {
         return moveSpeed;
+    }
+
+    public void setMidAirCollision(bool floop)
+    {
+        MidAirCollision = floop;
     }
 
     void checkToSwitchPositions()
@@ -144,14 +193,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (otherPlayer.position.x > transform.position.x)
                 {
-                    this.gameObject.transform.localScale = new Vector2(-Xscale, transform.localScale.y);
+                    this.gameObject.transform.localScale = new Vector2(Xscale, transform.localScale.y);
                 }
                 else
                 {
-                    this.gameObject.transform.localScale = new Vector2(Xscale, transform.localScale.y);
+                    this.gameObject.transform.localScale = new Vector2(-Xscale, transform.localScale.y);
                 }
             }
-
             else
             {
                 if (otherPlayer.position.x < transform.position.x)

@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117116a54ad7e5143a18c563463a3dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 707245326}
 --- !u!4 &1237739937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1952526253970413398, guid: ad8553142fafc8740bfca90d561a9262,
@@ -704,6 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117116a54ad7e5143a18c563463a3dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 1541868772}
 --- !u!1 &1790143162
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +857,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &1436113425435087888
 Animator:
@@ -910,7 +912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c86e4f6c82e435498ac66ef3cd59758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.75
+  moveSpeed: 3
   gravity: -22.5
   jumpVelocity: 7.5
   Player2: 1
@@ -957,7 +959,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1436113425435087893
 BoxCollider2D:
@@ -1026,7 +1028,7 @@ SpriteRenderer:
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 651cf23c6fdb86e4a8f55bb31e3aaf43, type: 3}
   m_Color: {r: 1, g: 0, b: 0.8634262, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.32, y: 0.32}
@@ -1177,7 +1179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c86e4f6c82e435498ac66ef3cd59758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2.5
+  moveSpeed: 4
   gravity: -22.5
   jumpVelocity: 7.5
   Player2: 0
