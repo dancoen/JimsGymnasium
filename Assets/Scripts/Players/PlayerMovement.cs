@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime);
+        controller.Move(velocity * Time.fixedDeltaTime);
 
         holdingJump = false;
 
@@ -187,26 +187,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (controller.collisions.below) //Change Later to switch sides only when in the standing state
         {
-
             //Assuming player1 is on the left.  Turning around on position switch.
             if (Player2)
             {
-                if (otherPlayer.position.x > transform.position.x)
+                if (System.Math.Round(otherPlayer.position.x,4) > System.Math.Round(transform.position.x, 4))
                 {
                     this.gameObject.transform.localScale = new Vector2(Xscale, transform.localScale.y);
                 }
-                else
+                else if (otherPlayer.position.x < transform.position.x)
                 {
                     this.gameObject.transform.localScale = new Vector2(-Xscale, transform.localScale.y);
                 }
             }
             else
             {
-                if (otherPlayer.position.x < transform.position.x)
+                if (System.Math.Round(otherPlayer.position.x, 4) < System.Math.Round(transform.position.x, 4))
                 {
                     this.gameObject.transform.localScale = new Vector2(-Xscale, transform.localScale.y);
                 }
-                else
+                else if (otherPlayer.position.x > transform.position.x)
                 {
                     this.gameObject.transform.localScale = new Vector2(Xscale, transform.localScale.y);
                 }
